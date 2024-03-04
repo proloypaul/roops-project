@@ -169,7 +169,7 @@
                                                                 <input type="text" class="form-control " placeholder="Select Type" onclick="showContentDropdown(1000, null)" autocomplete="off" id="contentsTitleInput_1000" name="parent_category" onkeypress="return event.keyCode != 13;">
                                                                 <div class="content_dropdown-menu d-none w-100 border-0 dropdownMenu_ dropdownBox" id="dropdownMenu_1000" style="margin-left: 0px;box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);border:1px solid gray;">
                                                                     <% records.forEach(objects=>{ %>
-                                                                        <div class="content_dropdown-item p-2" onclick="selectOption(this, null)">
+                                                                        <div class="content_dropdown-item p-2 parent" onclick="selectOption(this, null)">
                                                                             <%=objects.parent_category.parent_category%>
                                                                         </div>
                                                                         <!-- <div class="content_dropdown-item p-2" onclick="selectOption(this, null)">Womens and Girls Fashion</div>
@@ -293,6 +293,8 @@
 
                                                             let sku = document.querySelector('#sku');
                                                             let upc = document.querySelector('#upc');
+
+                                                            // if(tag.classList.contains('parent'))
 
                                                             axios.post('/product/get_category', { tagInnerText })
                                                                 .then(response => {

@@ -280,34 +280,23 @@ const postAddProduct = async (req, res) => {
             console.log('No files uploaded with the name "secondary_image"');
         }
 
-        if (upc_code === '') {
-            let latestCategory = await parentCategory.findOne({}).sort({ createdAt: -1 });
-            // console.log('Modhu');
+        let latestCategory = await parentCategory.findOne({}).sort({ createdAt: -1 });
+        console.log(latestCategory);
 
-            // console.log(latestCategory);
-
-            let latest_upc_code = parseInt(latestCategory.upc_code);
-            // console.log('latest_upc_code', latest_upc_code);
-
-            // console.log('before');
-            // console.log(latest_upc_code);
-
-            // latest_upc_code = isNaN(latest_upc_code) ? 0 : latest_upc_code;
-            latest_upc_code++;
-            // console.log('after');
-            // console.log(latest_upc_code);
-
-            // Ensure the UPC code is formatted as a 4-digit string with leading zeros
-            upc = latest_upc_code.toString().padStart(4, '0');
-            // console.log('Updated UPC: ', upc);
-
-            // Generate the timestamp
-            let timestamp = Date.now().toString();
-
-            // Concatenate the UPC code with the timestamp to create the SKU code
-            sku = upc + timestamp;
-            // console.log(upc);
-            // console.log(sku);
+        if (upc_code == '') {
+            if (latestCategory == null) {
+                upc = '1201';
+                let timestamp = Date.now().toString();
+                sku = upc + timestamp;
+            }
+            else {
+                let latest_upc_code = parseInt(latestCategory.upc_code);
+                latest_upc_code++;
+                upc = latest_upc_code.toString();
+                let timestamp = Date.now().toString();
+                sku = latest_upc_code + timestamp;
+                // console.log(upc);
+            }
         }
 
         //Global Variable
@@ -318,15 +307,6 @@ const postAddProduct = async (req, res) => {
         let parent_cat = await parentCategory.findOne({ parent_category: parent_category });
         let sub_cat = await subCategory.findOne({ sub_category: sub_category });
         let cat = await Category.findOne({ category: category });
-        console.log('monu1');
-
-        console.log(parent_cat);
-        console.log(sub_cat);
-        console.log(cat);
-
-        console.log('monu2');
-
-
 
         if (!(parent_cat)) {
             parent = await parentCategory.create({
@@ -420,17 +400,17 @@ const postAddProduct = async (req, res) => {
 
 // from axios calling
 const getCategory = async (req, res) => {
-    // console.log('jjj');
+    let upc_code;
     try {
         let { tagInnerText } = req.body;
         // console.log(tagInnerText);
-
         let category = await parentCategory.findOne({ parent_category: tagInnerText });
-
-        let upc_code = category.upc_code;
+        if (category) {
+            console.log('Exist Upc');
+            upc_code = category.upc_code;
+        }
 
         // Fetch category data from the database here   
-
         res.send({
             success: true,
             u_code: upc_code,
