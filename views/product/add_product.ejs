@@ -941,7 +941,12 @@
             /* background: rgb(173, 48, 48); */
         }
     </style>
-
+    <style>
+        .content_dropdown-menu {
+            max-height: 300px;
+            overflow-y: scroll;
+        }
+    </style>
 </head>
 
 <!-- body start -->
@@ -1016,17 +1021,11 @@
                                                 <div class=" position-relative single-contact-info productName" style="margin-top: 7px">
                                                     <input type="text" class="form-control " placeholder="Select Type" onclick="showContentDropdown(1000, null)" autocomplete="off" id="contentsTitleInput_1000" name="parent_category" onkeypress="return event.keyCode != 13;">
                                                     <div class="content_dropdown-menu d-none w-100 border-0 dropdownMenu_ dropdownBox" id="dropdownMenu_1000" style="margin-left: 0px;box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);border:1px solid gray;">
-                                                        <% data.forEach(objects=>{ %>
+                                                        <% parent.forEach(parent=>{ %>
                                                             <div class="content_dropdown-item p-2 parent" onclick="selectOption(this, null)">
-                                                                <%=objects.parent_category.parent_category%>
+                                                                <%=parent.parent_category%>
                                                             </div>
-                                                            <!-- <div class="content_dropdown-item p-2" onclick="selectOption(this, null)">Womens and Girls Fashion</div>
-                                                            <div class="content_dropdown-item p-2" onclick="selectOption(this, null)">Home and Gadgets</div>
-                                                            <div class="content_dropdown-item p-2" onclick="selectOption(this, null)">Kitchen & Dining</div>
-                                                            <div class="content_dropdown-item p-2" onclick="selectOption(this, null)">Health & Beauty</div>
-                                                            <div class="content_dropdown-item p-2" onclick="selectOption(this, null)">Baby & Kids</div>
-                                                            <div class="content_dropdown-item p-2" onclick="selectOption(this, null)">Shaver & Trimmer</div>
-                                                            <div class="content_dropdown-item p-2" onclick="selectOption(this, null)">Electronics</div> -->
+
                                                             <% });%>
                                                     </div>
                                                 </div>
@@ -1040,18 +1039,12 @@
                                                 <div class=" position-relative single-contact-info productName" style="margin-top: 7px">
                                                     <input type="text" class="form-control " placeholder="Select Type" onclick="showContentDropdown(1002, null)" autocomplete="off" id="contentsTitleInput_1002" name="sub_category" onkeypress="return event.keyCode != 13;">
                                                     <div class="content_dropdown-menu d-none w-100 border-0 dropdownMenu_ dropdownBox" id="dropdownMenu_1002" style="margin-left: 0px;box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);border:1px solid gray;">
-                                                        <% data.forEach(objects=>{ %>
+                                                        <% parent.forEach(p=>{p.subcategories.forEach(sub=>{%>
                                                             <div class="content_dropdown-item p-2" onclick="selectOption(this, null)">
-                                                                <%=objects.sub_category.sub_category%>
+                                                                <%=sub.sub_category%>
                                                             </div>
-                                                            <!-- <div class="content_dropdown-item p-2" onclick="selectOption(this, null)">Womens and Girls Fashion</div>
-                                                            <div class="content_dropdown-item p-2" onclick="selectOption(this, null)">Home and Gadgets</div>
-                                                            <div class="content_dropdown-item p-2" onclick="selectOption(this, null)">Kitchen & Dining</div>
-                                                            <div class="content_dropdown-item p-2" onclick="selectOption(this, null)">Health & Beauty</div>
-                                                            <div class="content_dropdown-item p-2" onclick="selectOption(this, null)">Baby & Kids</div>
-                                                            <div class="content_dropdown-item p-2" onclick="selectOption(this, null)">Shaver & Trimmer</div>
-                                                            <div class="content_dropdown-item p-2" onclick="selectOption(this, null)">Electronics</div> -->
-                                                            <% });%>
+                                                            <% }) }) %>
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -1064,11 +1057,11 @@
                                                 <div class=" position-relative single-contact-info productName" style="margin-top: 7px">
                                                     <input type="text" class="form-control " placeholder="Select Type" onclick="showContentDropdown(1003, null)" autocomplete="off" id="contentsTitleInput_1003" name="category" onkeypress="return event.keyCode != 13;">
                                                     <div class="content_dropdown-menu d-none w-100 border-0 dropdownMenu_ dropdownBox" id="dropdownMenu_1003" style="margin-left: 0px;box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);border:1px solid gray;">
-                                                        <% data.forEach(objects=>{ %>
+                                                        <% parent.forEach(p=>{p.subcategories.forEach(sub=>{ sub.categories.forEach(cate=>{ %>
                                                             <div class="content_dropdown-item p-2" onclick="selectOption(this, null)">
-                                                                <%=objects.category%>
+                                                                <%=cate.category%>
                                                             </div>
-                                                            <% });%>
+                                                            <%}) }) }) %>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1100,10 +1093,12 @@
                                                 <div class="position-relative single-contact-info productName" style="margin-top: 7px">
                                                     <input type="text" class="form-control " placeholder="Select Type" onclick="showContentDropdown(1001, null)" autocomplete="off" id="contentsTitleInput_1001" name="product_type" onkeypress="return event.keyCode != 13;">
                                                     <div class="content_dropdown-menu d-none w-100 border-0 dropdownMenu_ dropdownBox" id="dropdownMenu_1001" style="margin-left: 0px;box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);border:1px solid gray;">
-                                                        <div class="content_dropdown-item p-2" onclick="selectOption(this, null)">Trending</div>
-                                                        <div class="content_dropdown-item p-2" onclick="selectOption(this, null)">New Arrival</div>
+                                                        <!-- <div class="content_dropdown-item p-2" onclick="selectOption(this, null)">Trending</div> -->
+                                                        <div class="content_dropdown-item p-2" onclick="selectOption(this, null)">Fashion</div>
+                                                        <div class="content_dropdown-item p-2" onclick="selectOption(this, null)">Beauty</div>
+                                                        <!-- <div class="content_dropdown-item p-2" onclick="selectOption(this, null)">New Arrival</div>
                                                         <div class="content_dropdown-item p-2" onclick="selectOption(this, null)">Best Seller</div>
-                                                        <div class="content_dropdown-item p-2" onclick="selectOption(this, null)">Special Offer</div>
+                                                        <div class="content_dropdown-item p-2" onclick="selectOption(this, null)">Special Offer</div> -->
                                                     </div>
                                                 </div>
                                             </div>

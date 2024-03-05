@@ -61,8 +61,43 @@ const category = async (req, res) => {
             $unwind: "$sub_category"
         }
     ]);
-
     // console.log(records);
+
+    let parent = await parentCategory.aggregate([
+        {
+            $lookup: {
+                from: 'subcategories',
+                localField: '_id',
+                foreignField: 'parent_category_id',
+                as: 'subcategories'
+            }
+        },
+        {
+            $unwind: "$subcategories" // Unwind the subcategories array
+        },
+        {
+            $lookup: {
+                from: 'categories',
+                localField: 'subcategories._id',
+                foreignField: 'sub_category_id',
+                as: 'subcategories.categories'
+            }
+        },
+        {
+            $group: {
+                _id: '$_id',
+                parent_category: { $first: '$parent_category' },
+                upc_code: { $first: '$upc_code' },
+                category_image: { $first: '$category_image' },
+                createdAt: { $first: '$createdAt' },
+                __v: { $first: '$__v' },
+                subcategories: { $push: '$subcategories' } // Push subcategories into an array
+            }
+        }
+    ]);
+
+
+    // console.log(parent);
 
     if (record.length > 0) {
         const latestCategory = await parentCategory.findOne({}).sort({ createdAt: -1 });
@@ -90,7 +125,7 @@ const category = async (req, res) => {
     // let filteredSubRecords = record2.filter(cate => record.some(parent => parent._id.equals(cate.parent_category_id)));
     // console.log(filteredSubRecords);
 
-    res.render('product/category.ejs', { upc_code, sku_code, records });
+    res.render('product/category.ejs', { upc_code, sku_code, parent, records });
 }
 
 const postCategory = async (req, res) => {
@@ -230,45 +265,54 @@ const addProduct = async (req, res) => {
 const manualAddProduct = async (req, res) => {
     // console.log('hi');
     // let data = await Category.find({});
-    let data = await Category.aggregate([
+
+    let data = await parentCategory.aggregate([
         {
-            $addFields: {
-                parent_category_id: { $toObjectId: "$parent_category_id" },
-                sub_category_id: { $toObjectId: "$sub_category_id" }
+            $lookup: {
+                from: 'subcategories',
+                localField: '_id',
+                foreignField: 'parent_category_id',
+                as: 'subcategories'
             }
+        },
+        {
+            $unwind: "$subcategories" // Unwind the subcategories array
         },
         {
             $lookup: {
-                from: "parentcategories",
-                localField: "parent_category_id",
-                foreignField: "_id",
-                as: "parent_category"
+                from: 'categories',
+                localField: 'subcategories._id',
+                foreignField: 'sub_category_id',
+                as: 'subcategories.categories'
             }
         },
         {
-            $unwind: "$parent_category"
-        },
-        {
-            $lookup: {
-                from: "subcategories",
-                localField: "sub_category_id",
-                foreignField: "_id",
-                as: "sub_category"
+            $group: {
+                _id: '$_id',
+                parent_category: { $first: '$parent_category' },
+                upc_code: { $first: '$upc_code' },
+                category_image: { $first: '$category_image' },
+                createdAt: { $first: '$createdAt' },
+                __v: { $first: '$__v' },
+                subcategories: { $push: '$subcategories' } // Push subcategories into an array
             }
-        },
-        {
-            $unwind: "$sub_category"
         }
     ]);
-    // console.log(data);
-    res.render('product/add_product.ejs', { data });
+
+    // console.log('full data ', data);
+    // console.log('sub categories ', data[0].subcategories);
+    // console.log('categories ', data[0].subcategories[0].categories);
+    // console.log(data[0].subcategories);
+
+    res.render('product/add_product.ejs', { parent: data });
 };
 
 const postAddProduct = async (req, res) => {
     try {
         let sku, upc;
-        const { sku_code, upc_code, name, brand, color, parent_category, sub_category, category, product_type, buying_price, selling_price, discount, date, total_qty, price, old_price, description, colorVariants, sizeVariants } = req.body;
+        let { sku_code, upc_code, name, brand, color, parent_category, sub_category, category, product_type, buying_price, selling_price, discount, date, total_qty, price, old_price, description, colorVariants, sizeVariants } = req.body;
         let sec_img = [];
+        parent_category = parent_category.trim(); //for reduing extra space from a string
         let img = req.files['secondary_image'];
 
         if (img) {
@@ -400,13 +444,16 @@ const postAddProduct = async (req, res) => {
 
 // from axios calling
 const getCategory = async (req, res) => {
+    console.log('inside get category')
     let upc_code;
     try {
         let { tagInnerText } = req.body;
+
         // console.log(tagInnerText);
         let category = await parentCategory.findOne({ parent_category: tagInnerText });
+        // console.log(category)
         if (category) {
-            console.log('Exist Upc');
+            console.log('Exist Upc', category.upc_code);
             upc_code = category.upc_code;
         }
 
