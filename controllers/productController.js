@@ -432,9 +432,7 @@ const postAddProduct = async (req, res) => {
         //     category: category,
         //     upc_code: upc_code ? upc_code : upc,
         // });
-
         res.redirect('/product/product_list');
-
     }
 
     catch (err) {
@@ -470,13 +468,17 @@ const getCategory = async (req, res) => {
 
 
 const allProducts = async (req, res) => {
+    console.log('moy moy');
+    let product_id = req.params.id;
+
     try {
-        res.render('user/all_product.ejs');
+        res.render('product/all_product.ejs', { product_id });
     }
     catch (err) {
         console.log(err);
     }
 }
+
 
 const ProductDetails = async (req, res) => {
     try {

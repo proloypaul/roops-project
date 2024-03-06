@@ -189,413 +189,58 @@
     <nav class="navbar navbar-expand-md w-100 navbar-dark container gap-3">
       <a class="navbar-brand d-xl-inline" href="/"><img src="../../front_assets/img/ribon/ribon.png" style="width: 40px;" alt=""></a>
       <div class="primary-menu">
+
         <ul class="navbar-nav justify-content-start flex-grow-1 gap-1">
 
-          <li class="nav-item head dropdown">
-            <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="https://codervent.com/shopingo/demo/shopingo_V1/tv-shows.html" data-bs-toggle="dropdown">
-              Men
-            </a>
-            <div class="dropdown-menu dropdown-large-menu">
-              <div class="row">
 
-                <div class="col-12 col-md-3 col-xl-4">
-                  <h6 class="large-menu-title">Fashion</h6>
-                  <ul class="list-unstyled">
-                    <li><a href="#">Casual T-Shirts</a>
-                    </li>
-                    <li><a href="#">Formal Shirts</a>
-                    </li>
-                    <li><a href="#">Jackets</a>
-                    </li>
-                    <li><a href="#">Jeans</a>
-                    </li>
-                    <li><a href="#">Dresses</a>
-                    </li>
-                    <li><a href="#">Sneakers</a>
-                    </li>
-                    <li><a href="#">Belts</a>
-                    </li>
-                    <li><a href="#">Sports Shoes</a>
-                    </li>
-                  </ul>
-                </div>
-                <div class="col-12 col-md-3 col-xl-4">
-                  <h6 class="large-menu-title">Fashion</h6>
-                  <ul class="list-unstyled">
-                    <li><a href="#">Casual T-Shirts</a>
-                    </li>
-                    <li><a href="#">Formal Shirts</a>
-                    </li>
-                    <li><a href="#">Jackets</a>
-                    </li>
-                    <li><a href="#">Jeans</a>
-                    </li>
-                    <li><a href="#">Dresses</a>
-                    </li>
-                    <li><a href="#">Sneakers</a>
-                    </li>
-                    <li><a href="#">Belts</a>
-                    </li>
-                    <li><a href="#">Sports Shoes</a>
-                    </li>
-                  </ul>
-                </div>
-                <div class="col-12 col-md-3 col-xl-4">
-                  <h6 class="large-menu-title">Fashion</h6>
-                  <ul class="list-unstyled">
-                    <li><a href="#">Casual T-Shirts</a>
-                    </li>
-                    <li><a href="#">Formal Shirts</a>
-                    </li>
-                    <li><a href="#">Jackets</a>
-                    </li>
-                    <li><a href="#">Jeans</a>
-                    </li>
-                    <li><a href="#">Dresses</a>
-                    </li>
-                    <li><a href="#">Sneakers</a>
-                    </li>
-                    <li><a href="#">Belts</a>
-                    </li>
-                    <li><a href="#">Sports Shoes</a>
-                    </li>
-                  </ul>
-                </div>
-                <div class="col-12 col-md-3 col-xl-4 d-none d-xl-block">
-                  <div class="pramotion-banner1">
-                    <img src="img/menu-img.webp" class="img-fluid" alt="" />
-                  </div>
-                </div>
+          <% parent.forEach(p=>{ %>
 
-              </div>
-            </div>
-          </li>
-          <li class="nav-item head dropdown">
-            <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="https://codervent.com/shopingo/demo/shopingo_V1/tv-shows.html" data-bs-toggle="dropdown">
-              Women
-            </a>
-            <div class="dropdown-menu dropdown-large-menu">
-              <div class="row">
+            <li class="nav-item head dropdown">
+              <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="https://codervent.com/shopingo/demo/shopingo_V1/tv-shows.html" data-bs-toggle="dropdown">
+                <%=p.parent_category%>
+              </a>
+              <div class="dropdown-menu dropdown-large-menu">
+                <div class="row">
+                  <%p.subcategories.forEach(sub=>{%>
+                    <div class="col-12 col-md-3 col-xl-4">
+                      <h6 class="large-menu-title">
+                        <%=sub.sub_category%>
+                      </h6>
+                      <ul class="list-unstyled">
+                        <%sub.categories.forEach(cate=>{%>
+                          <li><a href="/product/all_Product/<%=cate._id%>">
+                              <%=cate.category%>
+                            </a>
+                          </li>
+                          <%});%>
+                      </ul>
+                    </div>
 
-                <div class="col-12 col-md-3 col-xl-4">
-                  <h6 class="large-menu-title">Fashion</h6>
-                  <ul class="list-unstyled">
-                    <li><a href="#">Casual T-Shirts</a>
-                    </li>
-                    <li><a href="#">Formal Shirts</a>
-                    </li>
-                    <li><a href="#">Jackets</a>
-                    </li>
-                    <li><a href="#">Jeans</a>
-                    </li>
-                    <li><a href="#">Dresses</a>
-                    </li>
-                    <li><a href="#">Sneakers</a>
-                    </li>
-                    <li><a href="#">Belts</a>
-                    </li>
-                    <li><a href="#">Sports Shoes</a>
-                    </li>
-                  </ul>
-                </div>
-                <div class="col-12 col-md-3 col-xl-4">
-                  <h6 class="large-menu-title">Fashion</h6>
-                  <ul class="list-unstyled">
-                    <li><a href="#">Casual T-Shirts</a>
-                    </li>
-                    <li><a href="#">Formal Shirts</a>
-                    </li>
-                    <li><a href="#">Jackets</a>
-                    </li>
-                    <li><a href="#">Jeans</a>
-                    </li>
-                    <li><a href="#">Dresses</a>
-                    </li>
-                    <li><a href="#">Sneakers</a>
-                    </li>
-                    <li><a href="#">Belts</a>
-                    </li>
-                    <li><a href="#">Sports Shoes</a>
-                    </li>
-                  </ul>
-                </div>
-                <div class="col-12 col-md-3 col-xl-4">
-                  <h6 class="large-menu-title">Fashion</h6>
-                  <ul class="list-unstyled">
-                    <li><a href="#">Casual T-Shirts</a>
-                    </li>
-                    <li><a href="#">Formal Shirts</a>
-                    </li>
-                    <li><a href="#">Jackets</a>
-                    </li>
-                    <li><a href="#">Jeans</a>
-                    </li>
-                    <li><a href="#">Dresses</a>
-                    </li>
-                    <li><a href="#">Sneakers</a>
-                    </li>
-                    <li><a href="#">Belts</a>
-                    </li>
-                    <li><a href="#">Sports Shoes</a>
-                    </li>
-                  </ul>
-                </div>
-                <div class="col-12 col-md-3 col-xl-4 d-none d-xl-block">
+                    <%});%>
+
+                      <!-- <div class="col-12 col-md-3 col-xl-4 d-none d-xl-block">
                   <div class="pramotion-banner1">
                     <img src="../../front_assets/img/menu-img.webp" class="img-fluid" alt="" />
                   </div>
-                </div>
+                </div> -->
 
+                </div>
               </div>
-            </div>
-          </li>
-          <li class="nav-item head dropdown">
-            <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="https://codervent.com/shopingo/demo/shopingo_V1/tv-shows.html" data-bs-toggle="dropdown">
-              Kids
-            </a>
-            <div class="dropdown-menu dropdown-large-menu">
-              <div class="row">
+            </li>
+            <%})%>
 
-                <div class="col-12 col-md-3 col-xl-4">
-                  <h6 class="large-menu-title">Fashion</h6>
-                  <ul class="list-unstyled">
-                    <li><a href="#">Casual T-Shirts</a>
-                    </li>
-                    <li><a href="#">Formal Shirts</a>
-                    </li>
-                    <li><a href="#">Jackets</a>
-                    </li>
-                    <li><a href="#">Jeans</a>
-                    </li>
-                    <li><a href="#">Dresses</a>
-                    </li>
-                    <li><a href="#">Sneakers</a>
-                    </li>
-                    <li><a href="#">Belts</a>
-                    </li>
-                    <li><a href="#">Sports Shoes</a>
-                    </li>
-                  </ul>
-                </div>
-                <div class="col-12 col-md-3 col-xl-4">
-                  <h6 class="large-menu-title">Fashion</h6>
-                  <ul class="list-unstyled">
-                    <li><a href="#">Casual T-Shirts</a>
-                    </li>
-                    <li><a href="#">Formal Shirts</a>
-                    </li>
-                    <li><a href="#">Jackets</a>
-                    </li>
-                    <li><a href="#">Jeans</a>
-                    </li>
-                    <li><a href="#">Dresses</a>
-                    </li>
-                    <li><a href="#">Sneakers</a>
-                    </li>
-                    <li><a href="#">Belts</a>
-                    </li>
-                    <li><a href="#">Sports Shoes</a>
-                    </li>
-                  </ul>
-                </div>
-                <div class="col-12 col-md-3 col-xl-4">
-                  <h6 class="large-menu-title">Fashion</h6>
-                  <ul class="list-unstyled">
-                    <li><a href="#">Casual T-Shirts</a>
-                    </li>
-                    <li><a href="#">Formal Shirts</a>
-                    </li>
-                    <li><a href="#">Jackets</a>
-                    </li>
-                    <li><a href="#">Jeans</a>
-                    </li>
-                    <li><a href="#">Dresses</a>
-                    </li>
-                    <li><a href="#">Sneakers</a>
-                    </li>
-                    <li><a href="#">Belts</a>
-                    </li>
-                    <li><a href="#">Sports Shoes</a>
-                    </li>
-                  </ul>
-                </div>
-                <div class="col-12 col-md-3 col-xl-4 d-none d-xl-block">
-                  <div class="pramotion-banner1">
-                    <img src="img/menu-img.webp" class="img-fluid" alt="" />
-                  </div>
-                </div>
 
-              </div>
-            </div>
-          </li>
-          <li class="nav-item head dropdown">
-            <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="https://codervent.com/shopingo/demo/shopingo_V1/tv-shows.html" data-bs-toggle="dropdown">
-              Home
-            </a>
-            <div class="dropdown-menu dropdown-large-menu">
-              <div class="row">
 
-                <div class="col-12 col-md-3 col-xl-4">
-                  <h6 class="large-menu-title">Fashion</h6>
-                  <ul class="list-unstyled">
-                    <li><a href="#">Casual T-Shirts</a>
-                    </li>
-                    <li><a href="#">Formal Shirts</a>
-                    </li>
-                    <li><a href="#">Jackets</a>
-                    </li>
-                    <li><a href="#">Jeans</a>
-                    </li>
-                    <li><a href="#">Dresses</a>
-                    </li>
-                    <li><a href="#">Sneakers</a>
-                    </li>
-                    <li><a href="#">Belts</a>
-                    </li>
-                    <li><a href="#">Sports Shoes</a>
-                    </li>
-                  </ul>
-                </div>
-                <div class="col-12 col-md-3 col-xl-4">
-                  <h6 class="large-menu-title">Fashion</h6>
-                  <ul class="list-unstyled">
-                    <li><a href="#">Casual T-Shirts</a>
-                    </li>
-                    <li><a href="#">Formal Shirts</a>
-                    </li>
-                    <li><a href="#">Jackets</a>
-                    </li>
-                    <li><a href="#">Jeans</a>
-                    </li>
-                    <li><a href="#">Dresses</a>
-                    </li>
-                    <li><a href="#">Sneakers</a>
-                    </li>
-                    <li><a href="#">Belts</a>
-                    </li>
-                    <li><a href="#">Sports Shoes</a>
-                    </li>
-                  </ul>
-                </div>
-                <div class="col-12 col-md-3 col-xl-4">
-                  <h6 class="large-menu-title">Fashion</h6>
-                  <ul class="list-unstyled">
-                    <li><a href="#">Casual T-Shirts</a>
-                    </li>
-                    <li><a href="#">Formal Shirts</a>
-                    </li>
-                    <li><a href="#">Jackets</a>
-                    </li>
-                    <li><a href="#">Jeans</a>
-                    </li>
-                    <li><a href="#">Dresses</a>
-                    </li>
-                    <li><a href="#">Sneakers</a>
-                    </li>
-                    <li><a href="#">Belts</a>
-                    </li>
-                    <li><a href="#">Sports Shoes</a>
-                    </li>
-                  </ul>
-                </div>
-                <div class="col-12 col-md-3 col-xl-4 d-none d-xl-block">
-                  <div class="pramotion-banner1">
-                    <img src="img/menu-img.webp" class="img-fluid" alt="" />
-                  </div>
-                </div>
-
-              </div>
-
-            </div>
-          </li>
-          <li class="nav-item head dropdown">
-            <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="https://codervent.com/shopingo/demo/shopingo_V1/tv-shows.html" data-bs-toggle="dropdown">
-              Beauty
-            </a>
-            <div class="dropdown-menu dropdown-large-menu">
-              <div class="row">
-
-                <div class="col-12 col-md-3 col-xl-4">
-                  <h6 class="large-menu-title">Fashion</h6>
-                  <ul class="list-unstyled">
-                    <li><a href="#">Casual T-Shirts</a>
-                    </li>
-                    <li><a href="#">Formal Shirts</a>
-                    </li>
-                    <li><a href="#">Jackets</a>
-                    </li>
-                    <li><a href="#">Jeans</a>
-                    </li>
-                    <li><a href="#">Dresses</a>
-                    </li>
-                    <li><a href="#">Sneakers</a>
-                    </li>
-                    <li><a href="#">Belts</a>
-                    </li>
-                    <li><a href="#">Sports Shoes</a>
-                    </li>
-                  </ul>
-                </div>
-                <div class="col-12 col-md-3 col-xl-4">
-                  <h6 class="large-menu-title">Fashion</h6>
-                  <ul class="list-unstyled">
-                    <li><a href="#">Casual T-Shirts</a>
-                    </li>
-                    <li><a href="#">Formal Shirts</a>
-                    </li>
-                    <li><a href="#">Jackets</a>
-                    </li>
-                    <li><a href="#">Jeans</a>
-                    </li>
-                    <li><a href="#">Dresses</a>
-                    </li>
-                    <li><a href="#">Sneakers</a>
-                    </li>
-                    <li><a href="#">Belts</a>
-                    </li>
-                    <li><a href="#">Sports Shoes</a>
-                    </li>
-                  </ul>
-                </div>
-                <div class="col-12 col-md-3 col-xl-4">
-                  <h6 class="large-menu-title">Fashion</h6>
-                  <ul class="list-unstyled">
-                    <li><a href="#">Casual T-Shirts</a>
-                    </li>
-                    <li><a href="#">Formal Shirts</a>
-                    </li>
-                    <li><a href="#">Jackets</a>
-                    </li>
-                    <li><a href="#">Jeans</a>
-                    </li>
-                    <li><a href="#">Dresses</a>
-                    </li>
-                    <li><a href="#">Sneakers</a>
-                    </li>
-                    <li><a href="#">Belts</a>
-                    </li>
-                    <li><a href="#">Sports Shoes</a>
-                    </li>
-                  </ul>
-                </div>
-                <div class="col-12 col-md-3 col-xl-4 d-none d-xl-block">
-                  <div class="pramotion-banner1">
-                    <img src="img/menu-img.webp" class="img-fluid" alt="" />
-                  </div>
-                </div>
-
-              </div>
-            </div>
-          </li>
-
-          <li class="nav-item search d-none d-md-block d-lg-block d-flex align-items-center">
-            <form class="rounded-pill border border-2" style="width: 355px;">
-              <button class="border-0 bg-white rounded-4 " type="submit"><i class="fa fa-search"></i></button>
-              <input class="rounded-2 fs-6" style="width:300px;outline: none;" type="text" placeholder="Search for Products, Brand ...." name="search">
-            </form>
-          </li>
+              <li class="nav-item search d-none d-md-block d-lg-block d-flex align-items-center">
+                <form class="rounded-pill border border-2" style="width: 355px;">
+                  <button class="border-0 bg-white rounded-4 " type="submit"><i class="fa fa-search"></i></button>
+                  <input class="rounded-2 fs-6" style="width:300px;outline: none;" type="text" placeholder="Search for Products, Brand ...." name="search">
+                </form>
+              </li>
 
         </ul>
+
+
       </div>
       <ul class="navbar-nav secondary-menu flex-row">
         <li class="nav-item d-none d-lg-block">

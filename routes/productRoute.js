@@ -20,7 +20,8 @@ router.post('/post_add_product', upload.fields([
 
 
 router.post('/get_category', getCategory);
-router.get('/all_Products', allProducts);
+router.get('/all_Product/:id', allProducts);
+
 router.get('/Product_details', ProductDetails);
 router.get('/cart', cart);
 
