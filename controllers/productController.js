@@ -6,7 +6,6 @@ const Category = require('../models/category');
 const Product = require('../models/product');
 const { ObjectId } = require('mongodb');
 
-
 // const addProduct = async (req, res) => {
 //     let error1 = req.query.error1;
 //     let error2 = req.query.error2;
@@ -467,22 +466,109 @@ const getCategory = async (req, res) => {
 }
 
 
-const allProducts = async (req, res) => {
-    console.log('moy moy');
-    let product_id = req.params.id;
-
+const allProduct = async (req, res) => {
     try {
-        res.render('product/all_product.ejs', { product_id });
+        let parent = await parentCategory.aggregate([
+            {
+                $lookup: {
+                    from: 'subcategories',
+                    localField: '_id',
+                    foreignField: 'parent_category_id',
+                    as: 'subcategories'
+                }
+            },
+            {
+                $unwind: "$subcategories" // Unwind the subcategories array
+            },
+            {
+                $lookup: {
+                    from: 'categories',
+                    localField: 'subcategories._id',
+                    foreignField: 'sub_category_id',
+                    as: 'subcategories.categories'
+                }
+            },
+            {
+                $group: {
+                    _id: '$_id',
+                    parent_category: { $first: '$parent_category' },
+                    upc_code: { $first: '$upc_code' },
+                    category_image: { $first: '$category_image' },
+                    createdAt: { $first: '$createdAt' },
+                    __v: { $first: '$__v' },
+                    subcategories: { $push: '$subcategories' } // Push subcategories into an array
+                }
+            }
+        ]);
+
+        let product_id = req.params.id;
+        let category = req.params.cate_name;
+        // console.log(product_id, category);
+
+        let records = await Product.find({ category: category });
+        // console.log(record);
+        res.render('product/all_product.ejs', { records, parent });
+
+    }
+    catch (err) {
+        console.log(err);
+    }
+}
+const all_Produc = async (req, res) => {
+    try {
+
+        res.render('product/all_product.ejs');
     }
     catch (err) {
         console.log(err);
     }
 }
 
-
 const ProductDetails = async (req, res) => {
+
     try {
-        res.render('user/product_details.ejs');
+        let parent = await parentCategory.aggregate([
+            {
+                $lookup: {
+                    from: 'subcategories',
+                    localField: '_id',
+                    foreignField: 'parent_category_id',
+                    as: 'subcategories'
+                }
+            },
+            {
+                $unwind: "$subcategories" // Unwind the subcategories array
+            },
+            {
+                $lookup: {
+                    from: 'categories',
+                    localField: 'subcategories._id',
+                    foreignField: 'sub_category_id',
+                    as: 'subcategories.categories'
+                }
+            },
+            {
+                $group: {
+                    _id: '$_id',
+                    parent_category: { $first: '$parent_category' },
+                    upc_code: { $first: '$upc_code' },
+                    category_image: { $first: '$category_image' },
+                    createdAt: { $first: '$createdAt' },
+                    __v: { $first: '$__v' },
+                    subcategories: { $push: '$subcategories' } // Push subcategories into an array
+                }
+            }
+        ]);
+
+        let product_id = req.params.id;
+        // console.log('product_id: ', product_id);
+
+        let records = await Product.findById(new ObjectId(product_id));
+        let reviews = [];
+
+        // console.log('records: ', records);
+        res.render('product/product_details.ejs', { parent, records, reviews });
+
     }
     catch (err) {
         console.log(err);
@@ -490,10 +576,42 @@ const ProductDetails = async (req, res) => {
 }
 const cart = async (req, res) => {
     try {
-        res.render('user/cart.ejs');
+        let parent = await parentCategory.aggregate([
+            {
+                $lookup: {
+                    from: 'subcategories',
+                    localField: '_id',
+                    foreignField: 'parent_category_id',
+                    as: 'subcategories'
+                }
+            },
+            {
+                $unwind: "$subcategories" // Unwind the subcategories array
+            },
+            {
+                $lookup: {
+                    from: 'categories',
+                    localField: 'subcategories._id',
+                    foreignField: 'sub_category_id',
+                    as: 'subcategories.categories'
+                }
+            },
+            {
+                $group: {
+                    _id: '$_id',
+                    parent_category: { $first: '$parent_category' },
+                    upc_code: { $first: '$upc_code' },
+                    category_image: { $first: '$category_image' },
+                    createdAt: { $first: '$createdAt' },
+                    __v: { $first: '$__v' },
+                    subcategories: { $push: '$subcategories' } // Push subcategories into an array
+                }
+            }
+        ]);
+        res.render('user/cart.ejs', { parent });
     }
     catch (err) {
         console.log(err);
     }
 }
-module.exports = { productList, category, postAddProduct, addProduct, manualAddProduct, postCategory, getCategory, allProducts, ProductDetails, cart }
+module.exports = { productList, category, postAddProduct, addProduct, manualAddProduct, postCategory, getCategory, allProduct, all_Produc, ProductDetails, cart }

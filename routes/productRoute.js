@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 // const multer = require('multer');
-const { productList, category, postAddProduct, addProduct, manualAddProduct, postCategory, getCategory, allProducts, ProductDetails, cart } = require('../controllers/productController');
+const { productList, category, postAddProduct, addProduct, manualAddProduct, postCategory, getCategory, allProduct, all_Produc, ProductDetails, cart } = require('../controllers/productController');
 
 const upload = require('../multer');
 
@@ -20,9 +20,10 @@ router.post('/post_add_product', upload.fields([
 
 
 router.post('/get_category', getCategory);
-router.get('/all_Product/:id', allProducts);
+router.get('/all_Product/:id/:cate_name', allProduct);
+router.get('/all_Product', all_Produc);
 
-router.get('/Product_details', ProductDetails);
+router.get('/product_details/:id', ProductDetails);
 router.get('/cart', cart);
 
 
