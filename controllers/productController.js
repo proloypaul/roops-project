@@ -614,4 +614,44 @@ const cart = async (req, res) => {
         console.log(err);
     }
 }
-module.exports = { productList, category, postAddProduct, addProduct, manualAddProduct, postCategory, getCategory, allProduct, all_Produc, ProductDetails, cart }
+
+const social = async (req, res) => {
+    try {
+
+        res.render('user/social.ejs', { parent });
+    }
+    catch (err) {
+        console.log(err);
+    }
+}
+const hotTrends = async (req, res) => {
+    try {
+
+        res.render('user/hot_trends.ejs', { parent });
+    }
+    catch (err) {
+        console.log(err);
+    }
+}
+const checkout = async (req, res) => {
+    try {
+
+        res.render('user/checkout.ejs', { parent });
+    }
+    catch (err) {
+        console.log(err);
+    }
+}
+const portFolio = async (req, res) => {
+    try {
+
+        res.render('user/port_folio.ejs', { parent });
+    }
+    catch (err) {
+        console.log(err);
+    }
+}
+
+module.exports = {
+    productList, category, postAddProduct, addProduct, manualAddProduct, postCategory, getCategory, allProduct, all_Produc, ProductDetails, cart, social, hotTrends, checkout, portFolio
+}
