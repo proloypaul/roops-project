@@ -467,6 +467,7 @@ const getCategory = async (req, res) => {
 
 
 const allProduct = async (req, res) => {
+
     try {
         let parent = await parentCategory.aggregate([
             {
