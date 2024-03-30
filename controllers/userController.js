@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 let parentCategory = require('../models/parentcategory');
 let subCategory = require('../models/subcategory');
 let Category = require('../models/category');
-let Product = require('../models/Product');
+// let Product = require('../models/Product');
 
 const userView = async (req, res) => {
 
