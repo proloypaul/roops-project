@@ -3,7 +3,9 @@ const bodyParser = require('body-parser');
 const parentCategory = require('../models/parentcategory');
 const subCategory = require('../models/subcategory');
 const Category = require('../models/category');
-const Product = require('../models/product');
+let Product = require('../models/Product');
+
+
 const { ObjectId } = require('mongodb');
 
 // const addProduct = async (req, res) => {
