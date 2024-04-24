@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const parentCategory = require('../models/parentcategory');
 const subCategory = require('../models/subcategory');
 const Category = require('../models/category');
-let Product = require('../models/Product');
+let Product = require('../models/product');
 
 
 const { ObjectId } = require('mongodb');
