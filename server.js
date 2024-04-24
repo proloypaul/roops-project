@@ -29,10 +29,10 @@ app.set('view engine', 'ejs');
 
 const mongoose = require('mongoose');
 
-const dbUri = require('./config/db');
-
+// const dbUri = require('./config/db');
+const dbUrl = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@roof-project.rvf3yku.mongodb.net/roof?retryWrites=true&w=majority&appName=roof-project`
 // Connect to MongoDB Atlas Database
-mongoose.connect(dbUri, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(dbUrl);
 const db = mongoose.connection;
 
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
